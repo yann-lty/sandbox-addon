@@ -16,7 +16,7 @@ jobs:
       image: nytimes/blender:3.3.1-cpu-ubuntu18.04
     steps:
       - name: Run black formatting
-        working-directory: $GITHUB_WORKSPACE
+        working-directory: ${{ github.workspace }}
         run: |
           ${BLENDERPY} -m pip install black
           ${BLENDERPY} -m black --check --target-version py310 .
@@ -27,7 +27,7 @@ jobs:
       image: nytimes/blender:3.3.1-cpu-ubuntu18.04
     steps:
       - name: Run pytest
-        working-directory: $GITHUB_WORKSPACE
+        working-directory: ${{ github.workspace }}
         run: |
           # "Install" addon manually
           cp -r ${ADDON_NAME} ${BLENDER_PATH}/scripts/addons
