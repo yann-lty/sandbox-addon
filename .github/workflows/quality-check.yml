@@ -18,6 +18,8 @@ jobs:
       - name: Run black formatting
         working-directory: ${{ github.workspace }}
         run: |
+          ls
+          pwd
           ${BLENDERPY} -m pip install black
           ${BLENDERPY} -m black --check --target-version py310 .
   
@@ -29,6 +31,8 @@ jobs:
       - name: Run pytest
         working-directory: ${{ github.workspace }}
         run: |
+          ls
+          pwd
           # "Install" addon manually
           cp -r ${ADDON_NAME} ${BLENDER_PATH}/scripts/addons
           # Install pytest in Blender's Python interpreter
