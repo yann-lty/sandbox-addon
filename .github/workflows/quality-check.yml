@@ -1,0 +1,39 @@
+name: quality-check
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  ADDON_NAME: "sandbox"
+
+jobs:
+  black:
+    runs-on: ubuntu-latest
+    container: 
+      image: nytimes/blender:3.3.1-cpu-ubuntu18.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Test black formatting
+        run: |
+          ${BLENDERPY} -m pip install black
+          ${BLENDERPY} -m black --check --target-version py310 .
+  
+  pytest:
+    runs-on: ubuntu-latest
+    container: 
+      image: nytimes/blender:3.3.1-cpu-ubuntu18.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run pytest
+        run: |
+          # "Install" addon manually
+          cp -r ${ADDON_NAME} ${BLENDER_PATH}/scripts/addons
+          # Install pytest in Blender's Python interpreter
+          ${BLENDERPY} -m pip install pytest
+          # Run unit tests
+          blender -b -P scripts/run_pytest.py
+
+  
