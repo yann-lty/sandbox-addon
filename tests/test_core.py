@@ -12,4 +12,4 @@ def test_add_gpencil():
     # Object should be a GP object.
     assert obj.type == "GPENCIL"
     # Object should be linked in active scene.
-    assert obj in bpy.context.scene.objects
+    assert obj.name in bpy.context.scene.objects
