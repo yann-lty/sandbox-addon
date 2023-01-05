@@ -1,0 +1,19 @@
+site_name: Sandbox Documentation
+
+use_directory_urls: false
+
+theme: 
+  name: readthedocs
+
+plugins:
+  - search
+  - mermaid2
+
+markdown_extensions:
+  - def_list
+  - admonition
+
+nav:
+  - Home: index.md
+  - Best Practices: best-practices.md 
+
